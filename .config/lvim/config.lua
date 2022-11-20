@@ -256,14 +256,13 @@ vim.api.nvim_set_keymap("n", "<esc>", "<cmd>nohlsearch<CR>", basicConfigKeymap)
 vim.api.nvim_set_keymap("n", "zo", "zO", basicConfigKeymap)
 
 -- Focus the nvim tree
-vim.api.nvim_set_keymap("t", "<c-l>", "<cmd>NvimTreeFocus<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<c-l>", "<cmd>NvimTreeFocus<cr>", basicConfigKeymap)
 
 -- TEXT OBJECTS
 
 -- Line without the whitespaces
-vim.api.nvim_set_keymap("o", "il", ":<c-u>normal! $v^<CR>", basicConfigKeymap)
 vim.api.nvim_set_keymap("x", "il", ":<c-u>normal! $v^<CR>", basicConfigKeymap)
-
+vim.api.nvim_set_keymap("o", "il", ":<c-u>normal! $v^<CR>", basicConfigKeymap)
 
 -- Inside between two same chars or first char everything except the next char
 local function basic_text_objects()
@@ -284,7 +283,8 @@ basic_text_objects()
 
 
 -- Indentation
-local function select_indent(around)
+-- Should be on new file?
+function Select_indent(around)
     local start_indent = vim.fn.indent(vim.fn.line('.'))
     local blank_line_pattern = '^%s*$'
 
@@ -323,10 +323,10 @@ local function select_indent(around)
     end
 end
 
-vim.api.nvim_set_keymap("o", "ii", ":<c-u>lua select_indent()<CR>", basicConfigKeymap)
-vim.api.nvim_set_keymap("o", "ai", ":<c-u>lua select_indent(1)<CR>", basicConfigKeymap)
-vim.api.nvim_set_keymap("x", "ii", ":<c-u>lua select_indent()<CR>", basicConfigKeymap)
-vim.api.nvim_set_keymap("x", "ai", ":<c-u>lua select_indent(1)<CR>", basicConfigKeymap)
+vim.api.nvim_set_keymap("o", "ii", ":<c-u>lua Select_indent()<CR>", basicConfigKeymap)
+vim.api.nvim_set_keymap("o", "ai", ":<c-u>lua Select_indent(1)<CR>", basicConfigKeymap)
+vim.api.nvim_set_keymap("x", "ii", ":<c-u>lua Select_indent()<CR>", basicConfigKeymap)
+vim.api.nvim_set_keymap("x", "ai", ":<c-u>lua Select_indent(1)<CR>", basicConfigKeymap)
 
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -350,6 +350,11 @@ vim.api.nvim_set_keymap("i", ";", ";<c-g>u", basicConfigKeymap)
 vim.api.nvim_set_keymap("v", "<leader>(", "<esc>`>a)<esc>`<i(<esc>", basicConfigKeymap)
 vim.api.nvim_set_keymap("v", "<leader>5", "<esc>`>a )<esc>`<i( <esc>", basicConfigKeymap)
 
+-- Harpoon
+vim.api.nvim_set_keymap("n", "<C-,>", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<C-;>", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<C-:>", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<C-=>", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", basicConfigKeymap)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- Override of wichkeys
@@ -363,8 +368,6 @@ lvim.builtin.which_key.mappings[" "] = {
     },
 }
 
-lvim.builtin.which_key.mappings["h"] = ":ls<cr>:b<space>"
-
 lvim.builtin.which_key.mappings.l.r = {
     "<cmd>Telescope lsp_references<CR>", "References"
 }
@@ -375,6 +378,11 @@ lvim.builtin.which_key.mappings.b.c = {
 
 lvim.builtin.which_key.mappings.b.d = {
     "<cmd>DBUIToggle<CR>", "Toggle db client"
+}
+
+lvim.builtin.which_key.mappings.h = { name = "Harpoon"
+    , t = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Toggle harpoon" }
+    , a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add file" }
 }
 
 lvim.builtin.which_key.mappings.k = {
@@ -407,6 +415,7 @@ lvim.builtin.which_key.mappings.w['-'] = { "<C-W><50", "Decrease windows width" 
 lvim.builtin.which_key.mappings.n = { name = "Custom stuff"
     , s = { "vip:sort<CR>", "Sort current paragraph" }
     , p = { "o<esc>\"%pyiWdd%", "Copy current path file on register" }
+    , a = { "<cmd>TermExec cmd='cfga %'<cr>", "Add current file to dotfiles" }
 }
 
 
@@ -471,7 +480,7 @@ lvim.plugins = {
     -- crs (snake), crm (Mixed), crp (pascal), crU (upper) etc
     { "tpope/vim-abolish" },
 
-    { "github/copilot.vim" },
+    -- { "github/copilot.vim" },
 
     {
         "tpope/vim-fugitive",
@@ -549,7 +558,7 @@ lvim.plugins = {
 
     'nelsyeung/twig.vim',
 
-    -- {'jwoudenberg/elm-pair', rtp = 'editor-integrations/neovim', disable = true },
+    'ThePrimeagen/harpoon',
 }
 
 
@@ -689,12 +698,12 @@ augroup filetype_twig
 augroup END
 ]])
 
-vim.cmd([[
-imap <silent><script><expr> <C-e> copilot#Accept('\<CR>')
-let g:copilot_no_tab_map = v:true
-]])
-vim.cmd([[
-let g:LanguageClient_rootMarkers = {
-  \ 'elm': ['elm.json'],
-  \ }
-]])
+-- vim.cmd([[
+-- imap <silent><script><expr> <C-e> copilot#Accept('\<CR>')
+-- let g:copilot_no_tab_map = v:true
+-- ]])
+-- vim.cmd([[
+-- let g:LanguageClient_rootMarkers = {
+--   \ 'elm': ['elm.json'],
+--   \ }
+-- ]])

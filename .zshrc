@@ -130,7 +130,10 @@ source ~/.local/goto/goto.sh
 # DOTFILE BARE
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfg='config'
-alias cfg_save='cd ~/.cfg/ && config push'
+alias cfgs='config status'
+alias cfga='config add'
+alias cfgc='config commit'
+alias cfgp='config push'
 
 # Ne pas confirmer si rm *
 setopt rmstarsilent
@@ -159,9 +162,6 @@ alias port-d="sudo lsof -i" # ex: sudo lsof -i :80
 # Source up the zsh files
 alias sup='source ~/.zshrc'
 alias zup='lvim ~/.zshrc'
-
-# Dotfiles
-alias dot="cd ~/.dotfiles && lv"
 
 # Shorcuts
 alias vlc="open /Applications/VLC.app -n"

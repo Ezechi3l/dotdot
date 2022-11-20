@@ -129,6 +129,8 @@ source ~/.local/goto/goto.sh
 
 # DOTFILE BARE
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cfg='config'
+alias cfg_save='cd ~/.cfg/ && config push'
 
 # Ne pas confirmer si rm *
 setopt rmstarsilent

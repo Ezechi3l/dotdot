@@ -7,6 +7,8 @@ a global executable or a path to
 an executable
 ]]
 
+local tips = require "tips"
+
 P = function(v)
     print(vim.inspect(v))
 
@@ -214,7 +216,7 @@ vim.api.nvim_set_keymap("n", "<C-j>", "<C-^>", basicConfigKeymap)
 vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", basicConfigKeymap)
 
 -- Search buffers
-vim.api.nvim_set_keymap("n", "<tab>", ":b ", basicConfigKeymap)
+-- vim.api.nvim_set_keymap("n", "<tab>", ":b ", basicConfigKeymap)
 
 -- Open terminal float
 vim.api.nvim_set_keymap("n", "<C-t>", ":ToggleTerm<cr>", basicConfigKeymap)
@@ -568,11 +570,6 @@ end
 lvim.builtin.gitsigns.opts.current_line_blame = true
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = { "*.json", "*.jsonc" },
---   -- enable wrap mode for json files only
---   command = "setlocal wrap",
--- })
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "zsh",
 --   callback = function()
@@ -580,6 +577,15 @@ lvim.builtin.gitsigns.opts.current_line_blame = true
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+--
+
+vim.api.nvim_create_augroup("startup", {})
+vim.api.nvim_create_autocmd({ "vimenter" }, {
+    group = "startup",
+    once = true,
+    callback = tips.show_tip
+})
+
 vim.cmd([[
 augroup vimrc
   autocmd!

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+#Make a shell's script executable
+
+if [ -z $1 ]; then
+    echo "Missing the ABSOLUTE path to the file"
+    exit 1
+fi
+
+echo "PATH MUST BE ABSOLUTE !"
+echo "Adding symbolic link to ~/.bin"
+ln -s $1 /Users/eze/.bin/
+
+echo "Making the script executable"
+chmod +x /Users/eze/.bin/*
+
+echo "Done."
+exit 0

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd ~/.dotfiles
+cp ~/.zshrc ./.zshrc
+cp ~/.config/lvim/config.lua ./.config/lvim/config.lua
+cp ~/.local/share/marker/user_commands.txt ./.local/share/marker/user_commands.txt
+source bootstrap.sh

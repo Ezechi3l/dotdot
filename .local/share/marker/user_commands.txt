@@ -1,0 +1,25 @@
+emacs -batch -l dunnet##adventure
+lvim +terminal##launch nvim in terminal mode
+youtube-dl {{url}}##download a video from yt and more
+open https://github.com/pindexis/marker##Marker github
+tmux source-file ~/.tmux.conf##tmux source file
+defaults write com.apple.dock workspaces-swoosh-animation-off -bool YES##Disable space animation
+git config --get##git config get
+git config --get remote.orgin.url##git get remote url
+git remote set-url origin git@github.com:'{{user/project}}'##git update origin
+tmux kill-session -t {{name}}##tmux stop session nom
+elm install {lib/##package
+elm reactor##run elm server localhost
+fg {number}##retrieve jobs supended
+jobs##List suspended jobs
+lvim -d {{file1}} {{file2}}##vim diff files
+wc -l /usr/share/dict/words##Dictionnary/List of english words
+git shortlog -e -s -n##Git list all authors of a repository
+git filter-repo --mailmap ../mailmap --force##Git change author of commits base on mailmap
+git reset --hard HEAD@{{{number}}}##Git reset from reflog history
+npm list -g --depth 0##Npm list all globals packages installed
+git push origin {{tag_name}}##Git tags push to remote origin
+npx prettier --write .##prettier current file
+mslkdfjmlk
+l##
+git push origin --delete {{branch_name}}##Git delete branch on origin

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Open a github's remote url
+
+git remote get-url origin | \
+  awk '{ split($0,a,":"); gsub("git@", "https://", a[1]); split(a[2], b, "."); print a[1] "/" b[1]; }'
+  # | \
+  # xargs open -a Google\ Chrome

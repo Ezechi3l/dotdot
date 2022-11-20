@@ -1,0 +1,126 @@
+[user]
+	email = mrezechi3l@gmail.com
+	name = Ezechi3l
+
+[includeIf "gitdir:~/Projects/Sites/Caramia/"]
+    path = .gitconfig-work
+
+[includeIf "gitdir:~/Projects/Sites/Trocr/"]
+    path = .gitconfig-work
+
+[includeIf "gitdir:~/Projects/Sites/Diesdas/"]
+    path = .gitconfig-work
+
+[includeIf "gitdir:~/Projects/Sites/HelloRse/"]
+    path = .gitconfig-work
+
+
+[alias]
+	lg = log --date=relative --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lgl = log -20 --all --date=relative --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  lgf = log --date=relative --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset%n%B'
+	oops = commit --amend --no-edit
+	review-local = "!git lg @{push}.."
+	del = branch -d
+	fdel = branch -D
+	po = pull origin
+
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+	# merge noff
+	mn = merge --no-ff
+	# List contributors with number of commits.
+	contributors = shortlog --summary --numbered
+
+	# Show the user email for the current repository.
+	whoami = config user.email
+
+	# Commit all changes.
+	ca = !git add -A && git commit -av
+
+[core]
+	pager = cat
+	whitespace = -trailing-space
+	excludesfile = ~/.gitignore
+
+[diff]
+	# Use better, descriptive initials (c, i, w) instead of a/b.
+	mnemonicPrefix = true
+	# Show renames/moves as such
+	renames = true
+	# When using --word-diff, assume --word-diff-regex=.
+	wordRegex = .
+	# Display submodule-related information (commit listings)
+	submodule = log
+
+[fetch]
+	# Auto-fetch submodule changes (sadly, won't auto-update)
+	recurseSubmodules = on-demand
+
+[grep]
+	# Consider most regexes to be ERE
+	extendedRegexp = true
+
+[log]
+	# Use abbrev SHAs whenever possible/relevant instead of full 40 chars
+	abbrevCommit = true
+	# Automatically --follow when given a single path
+	follow = true
+
+[merge]
+	# Display common-ancestor blocks in conflict hunks
+	conflictStyle = diff3
+
+[mergetool]
+	# Clean up backup files created by merge tools on tool exit
+	keepBackup = false
+	# Clean up temp files created by merge tools on tool exit
+	keepTemporaries = false
+	# Put the temp files in a dedicated dir anyway
+	writeToTemp = true
+	# Auto-accept file prompts when launching merge tools
+	prompt = false
+
+[pull]
+	# This is GREAT… when you know what you're doing and are careful
+	# not to pull --no-rebase over a local line containing a true merge.
+	rebase = merges
+	# WARNING! This option, which does away with the one gotcha of
+	# auto-rebasing on pulls, is only available from 1.8.5 onwards.
+
+[push]
+	# Default push should only push the current branch to its push target, regardless of its remote name
+	default = upstream
+	# When pushing, also push tags whose commit-ishs are now reachable upstream
+	followTags = true
+
+[rerere]
+	# If, like me, you like rerere, uncomment these
+	# autoupdate = true
+	# enabled = true
+
+[status]
+	# Display submodule rev change summaries in status
+	submoduleSummary = true
+	# Recursively traverse untracked directories to display all contents
+	showUntrackedFiles = all
+
+[color "branch"]
+	# Blue on black is hard to read in git branch -vv: use cyan instead
+	upstream = cyan
+
+[tag]
+	# Sort tags as version numbers whenever applicable, so 1.10.2 is AFTER 1.2.0.
+	sort = version:refname
+
+[versionsort]
+	prereleaseSuffix = -pre
+	prereleaseSuffix = .pre
+	prereleaseSuffix = -beta
+	prereleaseSuffix = .beta
+	prereleaseSuffix = -rc
+	prereleaseSuffix = .rc
+
+[help]
+	autocorrect = 10

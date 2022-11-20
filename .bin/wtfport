@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# List out the pid for the process that is currently listening on the provided port
+
+#lsof -i -P -n | grep LISTEN | grep "$1" | awk '{print $2}'
+
+# Only grep for port (with : before)
+lsof -i -P -n | grep LISTEN | grep :"$1" | awk '{ prin $2}'

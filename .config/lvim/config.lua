@@ -207,10 +207,13 @@ local basicConfigKeymap = { noremap = true, silent = true }
 vim.g.maplocalleader = ","
 
 -- Get out insert mode
+vim.api.nvim_set_keymap("n", "ù", "'", { noremap = false, silent = true })
+
+-- Get out insert mode
 vim.api.nvim_set_keymap("i", "jk", "<esc>", basicConfigKeymap)
 
 -- Switch between two buffers
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-^>", basicConfigKeymap)
+-- vim.api.nvim_set_keymap("n", "<C-j>", "<C-^>", basicConfigKeymap)
 
 -- Terminal exit mode with esc
 vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", basicConfigKeymap)
@@ -256,7 +259,7 @@ vim.api.nvim_set_keymap("n", "<esc>", "<cmd>nohlsearch<CR>", basicConfigKeymap)
 vim.api.nvim_set_keymap("n", "zo", "zO", basicConfigKeymap)
 
 -- Focus the nvim tree
-vim.api.nvim_set_keymap("n", "<c-l>", "<cmd>NvimTreeFocus<cr>", basicConfigKeymap)
+-- vim.api.nvim_set_keymap("n", "<c-l>", "<cmd>NvimTreeFocus<cr>", basicConfigKeymap)
 
 -- TEXT OBJECTS
 
@@ -351,10 +354,14 @@ vim.api.nvim_set_keymap("v", "<leader>(", "<esc>`>a)<esc>`<i(<esc>", basicConfig
 vim.api.nvim_set_keymap("v", "<leader>5", "<esc>`>a )<esc>`<i( <esc>", basicConfigKeymap)
 
 -- Harpoon
-vim.api.nvim_set_keymap("n", "<C-,>", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", basicConfigKeymap)
-vim.api.nvim_set_keymap("n", "<C-;>", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", basicConfigKeymap)
-vim.api.nvim_set_keymap("n", "<C-:>", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", basicConfigKeymap)
-vim.api.nvim_set_keymap("n", "<C-=>", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<c-j>", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<c-k>", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<c-l>", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<c-m>", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", basicConfigKeymap)
+
+vim.api.nvim_set_keymap("n", "<c-,>", "<cmd>lua require('harpoon.term').gotoTerminal(1)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<c-;>", "<cmd>lua require('harpoon.term').gotoTerminal(2)<cr>", basicConfigKeymap)
+vim.api.nvim_set_keymap("n", "<c-:>", "<cmd>lua require('harpoon.term').gotoTerminal(3)<cr>", basicConfigKeymap)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- Override of wichkeys

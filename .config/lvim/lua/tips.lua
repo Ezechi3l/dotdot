@@ -18,7 +18,6 @@ local M = {
         "Sois romantique.",
         "Deviens la personne la plus positive et enthousiaste que tu connaisses.",
         "Décoince-toi. Relax. À part quelques rares moments de vie ou de mort, rien n’est aussi important qu’il n’y parait.",
-        "Ne permets pas à ton téléphone d’interrompre des moments importants. Ils sont là pour nous, pas pour ceux qui appellent.",
         "Sois un bon perdant.",
         "Sois un bon gagnant.",
         "Quand quelqu’un te fait un câlin, laisse-le être le premier à te lâcher.",
